@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { Profile } from "@/lib/supabase";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -54,8 +56,9 @@ const roleColors = {
 
 export default function DashboardLayout({ children, currentRole, onRoleChange }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { profile, signOut } = useAuthContext();
 
-  const navigation = roleNavigation[currentRole];
+  const navigation = roleNavigation[profile?.role === "invoice_team" ? "invoice" : profile?.role || "staff"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -82,7 +85,7 @@ export default function DashboardLayout({ children, currentRole, onRoleChange }:
             </Button>
           </div>
 
-          {/* Role Switcher */}
+          {/* Role Display */}
           <div className="p-4 border-b border-sidebar-border">
             <div className={cn(
               "rounded-lg p-3 text-white text-sm font-medium",
@@ -91,29 +94,12 @@ export default function DashboardLayout({ children, currentRole, onRoleChange }:
               {sidebarOpen && (
                 <div>
                   <div className="text-xs opacity-90 mb-1">Current Role</div>
-                  <div className="capitalize">{currentRole === "invoice" ? "Invoice Team" : currentRole}</div>
+                  <div className="capitalize">
+                    {profile?.role === "invoice_team" ? "Invoice Team" : profile?.role}
+                  </div>
                 </div>
               )}
             </div>
-            
-            {sidebarOpen && (
-              <div className="mt-3 space-y-1">
-                {(["staff", "supplier", "invoice", "admin"] as const).map((role) => (
-                  <button
-                    key={role}
-                    onClick={() => onRoleChange(role)}
-                    className={cn(
-                      "w-full text-left px-3 py-2 rounded-md text-sm transition-colors",
-                      currentRole === role
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                        : "text-sidebar-foreground hover:bg-sidebar-accent/50"
-                    )}
-                  >
-                    {role === "invoice" ? "Invoice Team" : role.charAt(0).toUpperCase() + role.slice(1)}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Navigation */}
@@ -144,12 +130,10 @@ export default function DashboardLayout({ children, currentRole, onRoleChange }:
               {sidebarOpen && (
                 <div className="flex-1">
                   <p className="text-sm font-medium text-sidebar-foreground">
-                    {currentRole === "staff" ? "John Doe" : 
-                     currentRole === "supplier" ? "Green Feed Co." :
-                     currentRole === "invoice" ? "Jane Smith" : "Admin User"}
+                    {profile?.full_name || "User"}
                   </p>
                   <p className="text-xs text-sidebar-foreground/70">
-                    {currentRole === "invoice" ? "Invoice Team" : currentRole}
+                    {profile?.role === "invoice_team" ? "Invoice Team" : profile?.role}
                   </p>
                 </div>
               )}
@@ -159,6 +143,7 @@ export default function DashboardLayout({ children, currentRole, onRoleChange }:
                 variant="ghost"
                 size="sm"
                 className="w-full mt-3 justify-start text-sidebar-foreground hover:bg-sidebar-accent"
+                onClick={signOut}
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Sign Out
