@@ -1,13 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import DashboardLayout from "@/components/DashboardLayout";
+import StaffDashboard from "@/components/StaffDashboard";
+import SupplierDashboard from "@/components/SupplierDashboard";
+import InvoiceDashboard from "@/components/InvoiceDashboard";
+import AdminDashboard from "@/components/AdminDashboard";
 
 const Index = () => {
+  const [currentRole, setCurrentRole] = useState<"staff" | "supplier" | "invoice" | "admin">("staff");
+
+  const renderDashboard = () => {
+    switch (currentRole) {
+      case "staff":
+        return <StaffDashboard />;
+      case "supplier":
+        return <SupplierDashboard />;
+      case "invoice":
+        return <InvoiceDashboard />;
+      case "admin":
+        return <AdminDashboard />;
+      default:
+        return <StaffDashboard />;
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <DashboardLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+      {renderDashboard()}
+    </DashboardLayout>
   );
 };
 

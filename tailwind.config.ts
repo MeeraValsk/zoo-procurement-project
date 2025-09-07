@@ -22,6 +22,8 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          light: "hsl(var(--primary-light))",
+          dark: "hsl(var(--primary-dark))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -57,6 +59,33 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        table: {
+          header: "hsl(var(--table-header))",
+          row: "hsl(var(--table-row))",
+          "row-hover": "hsl(var(--table-row-hover))",
+          border: "hsl(var(--table-border))",
+        },
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
+        "gradient-accent": "var(--gradient-accent)",
+        "gradient-subtle": "var(--gradient-subtle)",
+      },
+      boxShadow: {
+        soft: "var(--shadow-soft)",
+        medium: "var(--shadow-medium)",
+        strong: "var(--shadow-strong)",
+      },
+      transitionTimingFunction: {
+        smooth: "var(--transition-smooth)",
       },
       borderRadius: {
         lg: "var(--radius)",
