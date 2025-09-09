@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Users, Package, AlertTriangle, Building2, FileText } from "lucide-react";
+import { TrendingUp, Users, Package, AlertTriangle, Building2, FileText, UserPlus } from "lucide-react";
 import { StatsCard } from "./StatsCard";
+import CreateUserForm from "./CreateUserForm";
+import { useToast } from "@/hooks/use-toast";
 
 
 const suppliers = [
@@ -21,6 +24,24 @@ const recentOrders = [
 ];
 
 export default function AdminDashboard() {
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false);
+  const [users, setUsers] = useState([
+    { id: "1", name: "John Doe", email: "john@zoo.com", role: "staff", status: "active" },
+    { id: "2", name: "Green Feed Co.", email: "contact@greenfeed.com", role: "supplier", status: "active" },
+    { id: "3", name: "Jane Smith", email: "jane@zoo.com", role: "invoice", status: "active" },
+  ]);
+  const { toast } = useToast();
+
+  const handleCreateUser = (userData: any) => {
+    const newUser = {
+      id: Date.now().toString(),
+      name: userData.fullName,
+      email: userData.email,
+      role: userData.role,
+      status: "active"
+    };
+    setUsers(prev => [...prev, newUser]);
+  };
   return (
     <div className="space-y-6">
       {/* Key Metrics */}
@@ -40,11 +61,11 @@ export default function AdminDashboard() {
           subtitle="+18% this month"
         />
         <StatsCard 
-          title="Active Suppliers" 
-          value="24" 
+          title="Active Users" 
+          value={users.filter(u => u.status === "active").length.toString()} 
           icon={<Users className="h-6 w-6" />} 
           variant="success"
-          subtitle="2 new this month"
+          subtitle="Total system users"
         />
         <StatsCard 
           title="Pending Issues" 
@@ -54,6 +75,61 @@ export default function AdminDashboard() {
           subtitle="3 resolved today"
         />
       </div>
+
+      {/* User Management */}
+      <Card className="shadow-medium">
+        <div className="p-6 border-b border-border">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold">User Management</h3>
+              <p className="text-sm text-muted-foreground">Create and manage system users</p>
+            </div>
+            <Button 
+              onClick={() => setShowCreateUserForm(true)}
+              className="bg-gradient-primary text-primary-foreground hover:bg-gradient-primary/90"
+            >
+              <UserPlus className="h-4 w-4 mr-2" />
+              Create New User
+            </Button>
+          </div>
+        </div>
+        
+        <Table>
+          <TableHeader className="bg-table-header">
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users.map((user) => (
+              <TableRow key={user.id} className="hover:bg-table-row-hover">
+                <TableCell className="font-medium">{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  <Badge variant="outline" className="capitalize">
+                    {user.role === "invoice" ? "Invoice Team" : user.role}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={user.status === "active" ? "default" : "secondary"}>
+                    {user.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">Edit</Button>
+                    <Button variant="outline" size="sm">Deactivate</Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
 
       {/* Suppliers Management */}
       <Card className="shadow-medium">
@@ -163,6 +239,13 @@ export default function AdminDashboard() {
         </Table>
       </Card>
 
+      {/* Create User Form Modal */}
+      {showCreateUserForm && (
+        <CreateUserForm 
+          onClose={() => setShowCreateUserForm(false)}
+          onSave={handleCreateUser}
+        />
+      )}
     </div>
   );
 }
