@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { FileText, AlertTriangle, CheckCircle, Clock, Eye } from "lucide-react";
+import { StatsCard } from "./StatsCard";
 
 const pendingInvoices = [
   { 
@@ -63,53 +64,10 @@ export default function InvoiceDashboard() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="p-6 bg-warning text-warning-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <Clock className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Pending Review</p>
-              <p className="text-2xl font-bold">8</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-destructive text-destructive-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <AlertTriangle className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Discrepancies</p>
-              <p className="text-2xl font-bold">3</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-success text-success-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <CheckCircle className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Verified</p>
-              <p className="text-2xl font-bold">52</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <FileText className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Total Value</p>
-              <p className="text-2xl font-bold">₹24.6L</p>
-            </div>
-          </div>
-        </Card>
+        <StatsCard title="Pending Review" value="8" icon={<Clock className="h-6 w-6" />} variant="warning" />
+        <StatsCard title="Discrepancies" value="3" icon={<AlertTriangle className="h-6 w-6" />} variant="warning" />
+        <StatsCard title="Verified" value="52" icon={<CheckCircle className="h-6 w-6" />} variant="success" />
+        <StatsCard title="Total Value" value="₹24.6L" icon={<FileText className="h-6 w-6" />} variant="primary" />
       </div>
 
       {/* Pending Invoices */}

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Package, TrendingUp, Clock } from "lucide-react";
+import { StatsCard } from "./StatsCard";
 
 const feedTypes = [
   "Hay", "Silage", "Green Forages", "Straw", "Pasture",
@@ -210,53 +211,30 @@ export default function StaffDashboard() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <ShoppingCart className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Total Orders</p>
-              <p className="text-2xl font-bold">24</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-success text-success-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <Package className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Delivered</p>
-              <p className="text-2xl font-bold">18</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-warning text-warning-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <Clock className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Pending</p>
-              <p className="text-2xl font-bold">6</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-gradient-accent text-accent-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <TrendingUp className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">This Month</p>
-              <p className="text-2xl font-bold">₹8.2L</p>
-            </div>
-          </div>
-        </Card>
+        <StatsCard
+          title="Total Orders"
+          value="24"
+          icon={<ShoppingCart className="h-6 w-6" />}
+          variant="primary"
+        />
+        <StatsCard
+          title="Delivered"
+          value="18"
+          icon={<Package className="h-6 w-6" />}
+          variant="success"
+        />
+        <StatsCard
+          title="Pending"
+          value="6"
+          icon={<Clock className="h-6 w-6" />}
+          variant="warning"
+        />
+        <StatsCard
+          title="This Month"
+          value="₹8.2L"
+          icon={<TrendingUp className="h-6 w-6" />}
+          variant="accent"
+        />
       </div>
 
       {/* Quick Actions */}

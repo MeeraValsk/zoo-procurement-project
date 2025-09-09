@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Package, TrendingUp, Clock, CheckCircle, FileText } from "lucide-react";
+import { StatsCard } from "./StatsCard";
 
 const receivedOrders = [
   { 
@@ -39,53 +40,10 @@ export default function SupplierDashboard() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="p-6 bg-gradient-accent text-accent-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <Package className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">New Orders</p>
-              <p className="text-2xl font-bold">3</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-warning text-warning-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <Clock className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">In Progress</p>
-              <p className="text-2xl font-bold">8</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-success text-success-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <CheckCircle className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Delivered</p>
-              <p className="text-2xl font-bold">45</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-medium">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              <TrendingUp className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-sm opacity-90">Revenue</p>
-              <p className="text-2xl font-bold">₹12.8L</p>
-            </div>
-          </div>
-        </Card>
+        <StatsCard title="New Orders" value="3" icon={<Package className="h-6 w-6" />} variant="accent" />
+        <StatsCard title="In Progress" value="8" icon={<Clock className="h-6 w-6" />} variant="warning" />
+        <StatsCard title="Delivered" value="45" icon={<CheckCircle className="h-6 w-6" />} variant="success" />
+        <StatsCard title="Revenue" value="₹12.8L" icon={<TrendingUp className="h-6 w-6" />} variant="primary" />
       </div>
 
       {/* Orders Table */}
