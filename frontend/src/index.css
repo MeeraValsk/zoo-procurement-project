@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Professional cyan-based color scheme for procurement dashboard */
+  --background: 0 0% 100%; /* Clean white background */
+  --foreground: 215 25% 27%; /* Professional dark gray text */
+  --card: 0 0% 100%; /* White card backgrounds */
+  --card-foreground: 215 20% 35%; /* Card text color */
+  --popover: 0 0% 100%; /* White popover background */
+  --popover-foreground: 215 25% 27%; /* Popover text */
+  --primary: 199 89% 24%; /* Professional cyan-800 primary */
+  --primary-foreground: 0 0% 100%; /* White text on primary */
+  --secondary: 38 92% 50%; /* Amber accent color */
+  --secondary-foreground: 0 0% 100%; /* White text on secondary */
+  --muted: 0 100% 97%; /* Light background for alternating rows */
+  --muted-foreground: 215 25% 27%; /* Text on muted backgrounds */
+  --accent: 38 92% 50%; /* Amber accent for highlights */
+  --accent-foreground: 0 0% 100%; /* White text on accent */
+  --destructive: 0 84% 60%; /* Professional red for errors */
+  --destructive-foreground: 0 0% 100%; /* White text on destructive */
+  --border: 214 32% 91%; /* Light gray borders */
+  --input: 210 40% 96%; /* Light gray input backgrounds */
+  --ring: 215 25% 27%; /* Focus ring */
+  --chart-1: 199 89% 24%; /* Primary chart color */
+  --chart-2: 38 92% 50%; /* Secondary chart color */
+  --chart-3: 0 84% 60%; /* Tertiary chart color */
+  --chart-4: 45 93% 47%; /* Quaternary chart color */
+  --chart-5: 215 20% 35%; /* Quinary chart color */
+  --radius: 0.5rem; /* Rounded corners */
+  --sidebar-background: 199 89% 24%; /* Cyan-800 sidebar background */
+  --sidebar-foreground: 0 0% 100%; /* White sidebar text */
+  --sidebar-primary: 199 100% 20%; /* Darker shade for hover effects */
+  --sidebar-primary-foreground: 0 0% 100%; /* Text on sidebar hover */
+  --sidebar-accent: 38 92% 50%; /* Amber accent for active sidebar items */
+  --sidebar-accent-foreground: 0 0% 100%; /* Text on active sidebar items */
+  --sidebar-border: 214 32% 91%; /* Sidebar borders */
+  --sidebar-ring: 215 25% 27%; /* Focus ring for sidebar items */
+}
+
+.dark {
+  /* Professional dark mode with cyan theme */
+  --background: 222 84% 5%; /* Dark background */
+  --foreground: 210 40% 98%; /* Light text */
+  --card: 222 84% 5%; /* Dark card background */
+  --card-foreground: 210 40% 98%; /* Light card text */
+  --popover: 222 84% 5%; /* Dark popover */
+  --popover-foreground: 210 40% 98%; /* Light popover text */
+  --primary: 199 89% 48%; /* Brighter cyan for dark mode */
+  --primary-foreground: 222 84% 5%; /* Dark text on primary */
+  --secondary: 215 28% 17%; /* Dark secondary */
+  --secondary-foreground: 210 40% 98%; /* Light text on secondary */
+  --muted: 215 28% 17%; /* Dark muted background */
+  --muted-foreground: 215 20% 65%; /* Muted text */
+  --accent: 38 92% 50%; /* Bright accent for dark mode */
+  --accent-foreground: 222 84% 5%; /* Dark text on accent */
+  --destructive: 0 84% 60%; /* Bright red for dark mode */
+  --destructive-foreground: 210 40% 98%; /* Light text on destructive */
+  --border: 215 28% 17%; /* Dark borders */
+  --input: 215 28% 17%; /* Dark input backgrounds */
+  --ring: 210 40% 98%; /* Light focus rings */
+  --chart-1: 199 89% 48%; /* Bright chart colors for dark mode */
+  --chart-2: 38 92% 50%; /* Amber */
+  --chart-3: 0 84% 60%; /* Red */
+  --chart-4: 45 93% 47%; /* Yellow */
+  --chart-5: 215 20% 65%; /* Gray */
+  --sidebar-background: 222 84% 5%; /* Dark sidebar */
+  --sidebar-foreground: 210 40% 98%; /* Light sidebar text */
+  --sidebar-primary: 199 89% 48%; /* Bright sidebar primary */
+  --sidebar-primary-foreground: 222 84% 5%; /* Dark text on sidebar primary */
+  --sidebar-accent: 215 28% 17%; /* Dark sidebar accent */
+  --sidebar-accent-foreground: 210 40% 98%; /* Light text on sidebar accent */
+  --sidebar-border: 215 28% 17%; /* Dark sidebar borders */
+  --sidebar-ring: 210 40% 98%; /* Light sidebar focus rings */
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  input, textarea, select {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  button {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(22, 78, 99, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(22, 78, 99, 0.6), 0 0 30px rgba(22, 78, 99, 0.4); }
+}
+
+/* Animation Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(22, 78, 99, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #164e63 0%, #0f4c57 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #164e63, #0891b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #164e63;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0f4c57;
+}
