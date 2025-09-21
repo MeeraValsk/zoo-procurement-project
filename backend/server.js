@@ -56,7 +56,7 @@ app.use("*", (_, res) => {
   res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3005;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
